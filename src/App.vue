@@ -9,7 +9,7 @@
         <li class="nav-item"><router-link to="/incidents">Инциденты</router-link></li>
       </ul>
       <div class="button-wrap">
-        <button class="btn btn-new" @click="show = !show">
+        <button class="btn btn-new" @click="open">
           Добавить инцидент
         </button>
       </div>
@@ -17,13 +17,15 @@
     <div class="container">
       <router-view/>
     </div>
-    <popup v-if="show" @click="show = !show" @close="show = !show">
+    <popup v-if="this.newIncident.show" @click="open" @close="close">
       <new-incident></new-incident>
     </popup>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import moment from 'moment';
 import Popup from './components/Popup';
 import NewIncident from './components/NewIncident';
 
@@ -37,6 +39,21 @@ export default {
     return {
       show: false,
     };
+  },
+  methods: {
+    open() {
+      const dt = moment().format('DD.MM.YYYY hh:mm:ss');
+      this.$store.commit('OPEN_INCIDENT', dt.valueOf());
+    },
+    close() {
+      this.$store.commit('CLOSE_INCIDENT');
+    },
+  },
+  computed: {
+    ...mapGetters(['newIncident']),
+  },
+  mounted() {
+
   },
 };
 </script>

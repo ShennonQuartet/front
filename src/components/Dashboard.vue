@@ -15,9 +15,6 @@ export default {
   name: 'Dashboard',
   data() {
     return {
-      //
-
-      //
       msg: 'Welcome to Your Vue.js App',
       datacollection: {
         labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
@@ -25,7 +22,7 @@ export default {
           {
             label: 'Средняя температура в месяце',
             backgroundColor: '#f87979',
-            data: [40, 39, 10, 40, 39, 80, 40],
+            data: [41, 39, 10, 40, 39, 80, 40],
           },
         ],
       },

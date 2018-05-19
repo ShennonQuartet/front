@@ -4,27 +4,57 @@
 
     <label>Выберите инцидент:</label>
       <div>
-        <input type="radio" value="1" v-model="picked" id="one"> <label for="one">Ошибка</label>
+        <input type="radio" value="1" v-model="picked" id="one" checked='true'> <label for="one">Ошибка</label>
       </div>
       <div>
-        <input type="radio" value="2" v-model="picked" id="two"> <label for="two">Вибросито</label>
+        <input type="radio" value="2" v-model="picked" id="two"> <label for="two">Вибросито</label> <!-- вибросиэто -->
       </div>
       <div class="form-edit">
         <label>Дата время</label>
-        <input type="text">
+        <input type="text" v-model='dt'>
       </div>
-      <button class="btn btn-new">
+      <button class="btn btn-new" @click.prevent="send">
         Добавить
       </button>
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'NewIncident',
   data() {
     return {
-      picked: {},
+      picked: 1,
+      dt: '',
     };
+  },
+  computed: {
+    ...mapGetters(['newIncident']),
+  },
+  mounted() {
+    this.dt = this.newIncident.dateTime;
+  },
+  methods: {
+    send() {
+      let type = 0;
+      if (this.picked === 1) {
+        type = 'stop';
+      } else {
+        type = 'vibr';
+      }
+
+      this.$api.sendIncident({
+        type,
+        datetime: this.dt,
+        user: {
+          pk: 1,
+        },
+      })
+        .then(() => {
+          this.$store.commit('CLOSE_INCIDENT');
+        });
+    },
   },
 };
 </script>

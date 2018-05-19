@@ -58,6 +58,12 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.$api.incidents()
+      .then((responce) => {
+        this.incidents = responce;
+      });
+  },
 
 };
 </script>
