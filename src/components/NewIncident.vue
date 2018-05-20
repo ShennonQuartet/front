@@ -45,16 +45,17 @@ export default {
         type = 'vibr';
       }
       const datetime = moment(this.dt, 'DD.MM.YYYY hh:mm:ss').format('YYYY-MM-DDThh:mm:ss');
-
-      this.$api.sendIncident({
+      const inc = {
         type,
         datetime,
         user: {
           pk: 1,
         },
-      })
+      };
+      this.$api.sendIncident(inc)
         .then((res) => {
           console.log('rere', res);
+          this.$store.commit('ADD_INCIDENT', Object.assign({}, inc, { user: { username: 'admin' } }));
           this.$store.commit('CLOSE_INCIDENT');
         });
     },
