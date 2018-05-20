@@ -8,6 +8,7 @@
           <th scope="col">Кем зарегистрирован</th>
           <th scope="col">Тип</th>
           <th scope="col">Подтверждение</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -17,6 +18,7 @@
           <td>{{item.type}}</td>
           <td v-if="item.confirmed" class="confirmed">Подтвержден</td>
           <td v-else class="refused">Не подтвержден</td>
+          <td><button class="btn btn-confirm" @click.prevent="confirm(item)">Подтвердить</button> <button class="btn btn-refuse" @click.prevent=refuse(item)>Отклонить</button></td>
         </tr>
       </tbody>
     </table>
@@ -36,19 +38,20 @@ export default {
       incidents: [],
     };
   },
+  methods: {
+    confirm(item) {
+      item.confirmed = true;
+    },
+    refuse(item) {
+      item.confirmed = false;
+    },
+  },
   mounted() {
     this.$api.incidents()
       .then((res) => {
         console.log('123', res);
         this.incidents = '';
         this.incidents = res.data
-        // .map((i) => {
-        //   if (i.type === 'stop') {
-
-        //   } else {
-
-        //   }
-        // })
         ;
       });
   },
@@ -98,5 +101,24 @@ export default {
     background-color: $body-bg;
   }
 }
-
+.btn-confirm {
+  font-weight: 500;
+  color: #0a9221;
+  border-color: #0a9221;
+  &:hover{
+    background: #0a9221;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+.btn-refuse {
+  font-weight: 500;
+  color: #920a0a;
+  border-color: #920a0a;
+  &:hover{
+    background: #920a0a;
+    color: #fff;
+    cursor: pointer;
+  }
+}
 </style>

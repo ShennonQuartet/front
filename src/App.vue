@@ -8,6 +8,9 @@
         <li class="nav-item"><router-link to="/">Торпеда</router-link></li>
         <li class="nav-item"><router-link to="/incidents">Инциденты</router-link></li>
       </ul>
+      <div class="status-wrap">
+        Статус системы<span :class="{ green: (status < 1), yellow: (status > 1 && status < 10), red: (status > 11) }"></span>
+      </div>
       <div class="button-wrap">
         <button class="btn btn-new" @click="open">
           Добавить инцидент
@@ -50,7 +53,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['newIncident']),
+    ...mapGetters(['newIncident', 'status']),
   },
   mounted() {
 
@@ -87,6 +90,7 @@ export default {
   display: flex;
   font-size: 14px;
   width: 100%;
+  // max-width: 660px;
   vertical-align: bottom;
   .nav-item {
     display: inline-block;
@@ -123,5 +127,34 @@ export default {
   padding-top: 15px;
   padding-right: 20px;
 }
+.status-wrap {
+  text-align: center;
+  // width: 100%;
+  padding-top: 20px;
+  padding-right: 30px;
+  font-size: 14px;
+  color: rgb(92, 86, 86);
+  display: block;
+  width: 320px;
+  span {
+    color: #fff;
+    display: inline-block;
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
 
+    position: relative;
+    margin-bottom: -4px;
+    margin-left: 4px;
+    &.green {
+      background: green;
+    }
+    &.yellow {
+      background: yellow;
+    }
+    &.red {
+      background: red;
+    }
+  }
+}
 </style>

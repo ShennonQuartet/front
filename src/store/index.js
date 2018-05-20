@@ -9,6 +9,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    status: 0,
+    img: {
+      url: '',
+      verdict: 1,
+    },
     newIncident: {
       show: false,
       dateTime: '',
@@ -246,6 +251,7 @@ export default new Vuex.Store({
   },
   getters: {
     newIncident: state => state.newIncident,
+    status: state => state.status,
   },
   mutations: {
     OPEN_INCIDENT(state, dateTime) {
@@ -267,22 +273,33 @@ export default new Vuex.Store({
       const dateT = moment(message.date);
       state.chartData.forEach((item) => {
         item.labels.push(message.date);
-        item.labels.splice(1, 1);
+        item.labels.splice(0, 1);
       });
 
       Object.keys(message).forEach((key) => {
-        if (key !== 'date') {
+        if (key !== 'date' && key !== 'verification') {
           const tempArr = [];
           state.chartData.forEach((i) => {
             tempArr.push(i.datasets[0].label);
           });
           // console.log('hh', tempArr);
           const index = tempArr.findIndex(item => item === key);
-          console.log('index', index, key, message[key], state.chartData[index].datasets);
+          console.log('index', index, key, message[key], state.chartData[index]);
           state.chartData[index].datasets[0].data.push(+message[key]);
-          state.chartData[index].datasets[0].data.splice(1, 1);
+          state.chartData[index].datasets[0].data.splice(0, 1);
           if (key === 'prediction') {
             state.chartData[index].datasets[0].borderColor = `rgb(${50 + 205 * (+message[key])}, ${155 - (205 * (+message[key]))}, 32)`;
+          }
+        }
+        if (key === 'verification') {
+          // console.log(message[key].image_url);
+          console.log('message[key]', message[key]);
+          state.img.url = message[key].image_url;
+          state.img.verdict = message[key].verdict;
+          if (message[key].verdict === 0 && state.status < 10) {
+            state.status = 1;
+          } else if (message[key].verdict === 0 && state.status === 10) {
+            state.status = 11;
           }
         }
       });

@@ -1,7 +1,8 @@
 <template>
   <div class="hello">
     <div class="row">
-      <div class="col-12"><line-chart :dataPlot="chartOptions[4]" :options="chartOptions"></line-chart></div>
+      <div class="col-9"><line-chart :dataPlot="chartOptions[4]" :options="chartOptions"></line-chart></div>
+      <div class="col-3"><img :src="this.$store.state.img.url" :class="{'img-green':this.$store.state.img.verdict, 'img-red':!this.$store.state.img.verdict}"/></div>
     </div>
     <div class="row">
       <div class="col-6"><line-chart :dataPlot="chartOptions[1]" chartId='one1' :options="chartOptions"></line-chart></div>
@@ -38,5 +39,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" rel="stylesheet/scss" scoped>
-
+  .img-green {
+    margin-top: 30px;
+    min-width: 100%;
+    min-height: 20px;
+    border: 3px solid rgb(36, 192, 36);
+  }
+  .img-red {
+    margin-top: 30px;
+    min-width: 100%;
+    min-height: 20px;
+    border: 3px solid rgb(36, 192, 36);
+  }
 </style>
