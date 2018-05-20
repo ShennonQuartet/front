@@ -271,7 +271,6 @@ export default new Vuex.Store({
       console.log('SOCKET_ONCLOSE', message);
     },
     SOCKET_ONMESSAGE(state, message) {
-      const flag = false;
       const dateT = moment(message.date);
       state.chartData.forEach((item) => {
         item.labels.push(message.date);
@@ -300,6 +299,14 @@ export default new Vuex.Store({
           state.img.verdict = message[key].verdict;
           if (message[key].verdict === 0 && state.status < 10) {
             state.status = 1;
+            const obj = {
+              type: 'vibr',
+              datetime: dateT,
+              user: {
+                pk: 2,
+              },
+            };
+            state.incidents.push(Object.assign({}, obj, { pk: state.incidents.length + 1 }));
           } else if (message[key].verdict === 0 && state.status === 10) {
             state.status = 11;
           }
@@ -310,6 +317,9 @@ export default new Vuex.Store({
     },
     SET_INCIDENTS(state, obj) {
       state.incidents = obj;
+    },
+    ADD_INCIDENT(state, obj) {
+      state.incidents.push(Object.assign({}, obj, { pk: state.incidents.length + 1 }));
     },
   },
   actions: {},
