@@ -9,7 +9,7 @@
         <li class="nav-item"><router-link to="/incidents">Инциденты</router-link></li>
       </ul>
       <div class="status-wrap">
-        Статус системы<span :class="{ green: (status < 1), yellow: (status > 1 && status < 10), red: (status > 11) }"></span>
+        Статус системы<span :class="{ green: (status < 1), yellow: (status >= 1 && status <= 10), red: (status > 10) }"></span>
       </div>
       <div class="button-wrap">
         <button class="btn btn-new" @click="open">
