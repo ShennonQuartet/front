@@ -51,15 +51,7 @@ export default {
   computed: {
     ...mapGetters(['incidents']),
   },
-  mounted() {
-    this.$api.incidents()
-      .then((res) => {
-        console.log('123', res);
-        this.incidents = '';
-        this.incidents = res.data;
-        this.$store.commit('SET_INCIDENTS', res.data);
-      });
-  },
+  
 
 };
 </script>
