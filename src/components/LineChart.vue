@@ -28,25 +28,30 @@ export default {
       type: Object,
     },
     dataPlot: {
-      default() {
-        return {
-          labels: ["January", "February", "March", "April", "May", "June", "July"],
-          datasets: [{
-            label: "My First dataset",
-            // backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45],
-          },
-          {
-            label: "My Second dataset",
-            // backgroundColor: 'rgb(155, 99, 132)',
-            borderColor: 'rgb(255, 199, 132)',
-            data: [5, 6, 15, 72, 71, 72, 44],
-          }],
-        }
-      }
+    // default() {
+    //   return {
+    //     labels: ["January", "February", "March", "April", "May", "June", "July"],
+    //     datasets: [{
+    //       label: "My First dataset",
+    //       // backgroundColor: 'rgb(255, 99, 132)',
+    //       borderColor: 'rgb(255, 99, 132)',
+    //       data: [10, 10, 5, 2, 20, 30, 45],
+    //     },
+    //     {
+    //       label: "My Second dataset",
+    //       // backgroundColor: 'rgb(155, 99, 132)',
+    //       borderColor: 'rgb(255, 199, 132)',
+    //       data: [5, 6, 15, 72, 71, 72, 44],
+    //     }],
+    //   };
+    // },
     },
   },
+  // computed: {
+  //   dataPlot() {
+  //     return this.$store.state.chartData;
+  //   },
+  // },
   data() {
     return {
       chart: {},
@@ -61,8 +66,14 @@ export default {
       }
     },
   },
+  watch: {
+    dataPlot() {
+      console.log('upd');
+      this.chart.update();
+    },
+  },
   mounted() {
-    const ctx = document.getElementById('myChart').getContext('2d');
+    const ctx = document.getElementById(this.chartId).getContext('2d');
 
     this.chart = new Chart(ctx, {
       // The type of chart we want to create
@@ -72,8 +83,20 @@ export default {
       data: this.dataPlot,
 
       // Configuration options go here
-      options: {},
+      options: {
+        animation: {
+          duration: 0,
+        },
+      },
     });
+
+    document.addEventListener(
+      'build',
+      () => {
+        console.log('up kostyl');
+        this.chart.update();
+      }, false);
+
     // console.log(chart.getElementsAtEvent);
     // this.chartData is created in the mixin.
     // If you want to pass options please create a local options object

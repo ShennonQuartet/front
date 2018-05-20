@@ -11,9 +11,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item of incidents" :key="item.id">
+        <tr v-for="item of incidents" :key="item.pk">
           <td scope="row">{{item.datetime}}</td>
-          <td>{{item.who}}</td>
+          <td>{{item.user.username}}</td>
           <td>{{item.type}}</td>
           <td v-if="item.confirmed" class="confirmed">Подтвержден</td>
           <td v-else class="refused">Отклонен</td>
@@ -33,35 +33,23 @@ export default {
   name: 'Dashboard',
   data() {
     return {
-      incidents: [
-        {
-          id: 0,
-          datetime: '21.12.2017 11:54',
-          who: 'Оператор',
-          type: 'Остановка',
-          confirmed: true,
-        },
-        {
-          id: 1,
-          datetime: '22.12.2017 11:54',
-          who: 'Система',
-          type: 'Вибросито',
-          confirmed: true,
-        },
-        {
-          id: 2,
-          datetime: '23.12.2017 11:54',
-          who: 'Система',
-          type: 'Остановка',
-          confirmed: false,
-        },
-      ],
+      incidents: [],
     };
   },
   mounted() {
     this.$api.incidents()
-      .then((responce) => {
-        this.incidents = responce;
+      .then((res) => {
+        console.log('123', res);
+        this.incidents = '';
+        this.incidents = res.data
+        // .map((i) => {
+        //   if (i.type === 'stop') {
+
+        //   } else {
+
+        //   }
+        // })
+        ;
       });
   },
 

@@ -9,7 +9,7 @@ export default {
     return new Promise((resolve, reject) => {
       web.get('incidents/')
         .then((response) => {
-          console.log(response);
+          return resolve(response);
         })
         .catch((err) => {
           console.error(err);

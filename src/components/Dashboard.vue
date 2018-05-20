@@ -1,7 +1,16 @@
 <template>
   <div class="hello">
-    <h1>Температура экструдера</h1>
-     <line-chart :chartData="chartOptions" :options="chartOptions"></line-chart>
+    <div class="row">
+      <div class="col-12"><line-chart :dataPlot="chartOptions[4]" :options="chartOptions"></line-chart></div>
+    </div>
+    <div class="row">
+      <div class="col-6"><line-chart :dataPlot="chartOptions[1]" chartId='one1' :options="chartOptions"></line-chart></div>
+      <div class="col-6"><line-chart :dataPlot="chartOptions[2]" chartId='one2' :options="chartOptions"></line-chart></div>
+    </div>
+    <div class="row">
+      <div class="col-6"><line-chart :dataPlot="chartOptions[3]" chartId='one3' :options="chartOptions"></line-chart></div>
+      <div class="col-6"><line-chart :dataPlot="chartOptions[0]" chartId='one4' :options="chartOptions"></line-chart></div>
+    </div>
   </div>
 </template>
 
@@ -15,30 +24,14 @@ export default {
   name: 'Dashboard',
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App',
-      datacollection: {
-        labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
-        datasets: [
-          {
-            label: 'Средняя температура в месяце',
-            backgroundColor: '#f87979',
-            data: [41, 39, 10, 40, 39, 80, 40],
-          },
-        ],
-      },
     };
   },
   computed: {
     chartOptions() {
-      return {
-        chartData: this.datacollection,
-      };
+      return this.$store.state.chartData;
     },
   },
   methods: {
-    getRandomInt() {
-      return Math.floor(Math.random() * (46)) + 5;
-    },
   },
 };
 </script>

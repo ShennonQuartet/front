@@ -19,6 +19,7 @@
   </div>
 </template>
 <script>
+import moment from 'moment';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -43,10 +44,11 @@ export default {
       } else {
         type = 'vibr';
       }
+      const datetime = moment(this.dt, 'DD.MM.YYYY hh:mm:ss').format('YYYY-MM-DDThh:mm:ss');
 
       this.$api.sendIncident({
         type,
-        datetime: this.dt,
+        datetime,
         user: {
           pk: 1,
         },
