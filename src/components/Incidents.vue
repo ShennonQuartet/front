@@ -16,7 +16,7 @@
           <td>{{item.user.username}}</td>
           <td>{{item.type}}</td>
           <td v-if="item.confirmed" class="confirmed">Подтвержден</td>
-          <td v-else class="refused">Отклонен</td>
+          <td v-else class="refused">Не подтвержден</td>
         </tr>
       </tbody>
     </table>
@@ -82,7 +82,7 @@ export default {
       color: green;
     }
     &.refused {
-      color: red;
+      color: gray;
     }
   }
   thead th {

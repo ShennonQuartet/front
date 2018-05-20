@@ -4,6 +4,7 @@
 </template>
 <script>
 import Chart from 'chart.js';
+import moment from 'moment';
 
 export default {
 
@@ -62,7 +63,8 @@ export default {
       if (this.chart.getElementsAtEvent(e)[0] !== undefined) {
         const i = this.chart.getElementsAtEvent(e)[0]._index;
         console.log('open inc', this.dataPlot.labels[i]);
-        this.$store.commit('OPEN_INCIDENT', this.dataPlot.labels[i]);
+        const td = moment(this.dataPlot.labels[i], 'YYYY-MM-DD hh:mm:ss').format('DD.MM.YYYY hh:mm:ss');
+        this.$store.commit('OPEN_INCIDENT', td);
       }
     },
   },

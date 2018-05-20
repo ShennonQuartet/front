@@ -4,7 +4,7 @@
 
     <label>Выберите инцидент:</label>
       <div>
-        <input type="radio" value="1" v-model="picked" id="one" checked='true'> <label for="one">Ошибка</label>
+        <input type="radio" value="1" v-model="picked" id="one" checked='true'> <label for="one">Остановка</label>
       </div>
       <div>
         <input type="radio" value="2" v-model="picked" id="two"> <label for="two">Вибросито</label> <!-- вибросиэто -->
@@ -53,7 +53,8 @@ export default {
           pk: 1,
         },
       })
-        .then(() => {
+        .then((res) => {
+          console.log('rere', res);
           this.$store.commit('CLOSE_INCIDENT');
         });
     },

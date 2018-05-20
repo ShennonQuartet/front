@@ -8,9 +8,7 @@ export default {
   incidents() {
     return new Promise((resolve, reject) => {
       web.get('incidents/')
-        .then((response) => {
-          return resolve(response);
-        })
+        .then((response) => resolve(response))
         .catch((err) => {
           console.error(err);
           reject(err);
@@ -22,6 +20,7 @@ export default {
       web.post('incidents/', obj)
         .then((response) => {
           console.log(response);
+          return resolve(response);
         })
         .catch((err) => {
           console.error(err);
