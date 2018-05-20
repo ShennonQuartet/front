@@ -150,7 +150,7 @@ export default {
       background: green;
     }
     &.yellow {
-      background: yellow;
+      background: rgb(247, 177, 25);
     }
     &.red {
       background: red;

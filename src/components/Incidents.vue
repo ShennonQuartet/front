@@ -15,7 +15,8 @@
         <tr v-for="item of incidents" :key="item.pk">
           <td scope="row">{{item.datetime}}</td>
           <td>{{item.user.username}}</td>
-          <td>{{item.type}}</td>
+          <td v-if="item.type === 'stop'">Остановка</td>
+          <td v-else >Вибросито</td>
           <td v-if="item.confirmed" class="confirmed">Подтвержден</td>
           <td v-else class="refused">Не подтвержден</td>
           <td><button class="btn btn-confirm" @click.prevent="confirm(item)">Подтвердить</button> <button class="btn btn-refuse" @click.prevent=refuse(item)>Отклонить</button></td>
@@ -26,6 +27,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import LineChart from './LineChart';
 
 export default {
@@ -35,7 +37,7 @@ export default {
   name: 'Dashboard',
   data() {
     return {
-      incidents: [],
+
     };
   },
   methods: {
@@ -46,13 +48,16 @@ export default {
       item.confirmed = false;
     },
   },
+  computed: {
+    ...mapGetters(['incidents']),
+  },
   mounted() {
     this.$api.incidents()
       .then((res) => {
         console.log('123', res);
         this.incidents = '';
-        this.incidents = res.data
-        ;
+        this.incidents = res.data;
+        this.$store.commit('SET_INCIDENTS', res.data);
       });
   },
 

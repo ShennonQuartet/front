@@ -10,6 +10,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     status: 0,
+    incidents: 0,
     img: {
       url: '',
       verdict: 1,
@@ -252,6 +253,7 @@ export default new Vuex.Store({
   getters: {
     newIncident: state => state.newIncident,
     status: state => state.status,
+    incidents: state => state.incidents,
   },
   mutations: {
     OPEN_INCIDENT(state, dateTime) {
@@ -305,6 +307,9 @@ export default new Vuex.Store({
       });
       console.log(state.chartData);
       document.dispatchEvent(window.event1);
+    },
+    SET_INCIDENTS(state, obj) {
+      state.incidents = obj;
     },
   },
   actions: {},
