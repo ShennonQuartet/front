@@ -14,7 +14,7 @@
       <tbody>
         <tr v-for="item of incidents" :key="item.pk">
           <td scope="row">{{item.datetime}}</td>
-          <td>{{item.user.username}}</td>
+          <td><span v-if="item.user">{{item.user.username}}</span><span v-else>system</span></td>
           <td v-if="item.type === 'stop'">Остановка</td>
           <td v-else >Вибросито</td>
           <td v-if="item.confirmed" class="confirmed">Подтвержден</td>
@@ -43,15 +43,23 @@ export default {
   methods: {
     confirm(item) {
       item.confirmed = true;
+      this.$api.editIncident(item)
+        .then((res) => {
+          console.log('res', res);
+        });
     },
     refuse(item) {
       item.confirmed = false;
+      this.$api.editIncident(item)
+        .then((res) => {
+          console.log('res', res);
+        });
     },
   },
   computed: {
     ...mapGetters(['incidents']),
   },
-  
+
 
 };
 </script>

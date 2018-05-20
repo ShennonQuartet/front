@@ -28,4 +28,17 @@ export default {
         });
     });
   },
+  editIncident(obj) {
+    return new Promise((resolve, reject) => {
+      web.put(`incidents/${obj.pk}`, obj)
+        .then((response) => {
+          console.log(response);
+          return resolve(response);
+        })
+        .catch((err) => {
+          console.error(err);
+          reject(err);
+        });
+    });
+  },
 };
