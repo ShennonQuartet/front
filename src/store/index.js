@@ -75,7 +75,7 @@ export default new Vuex.Store({
       ],
       datasets: [
         {
-          label: 'SPEED.CONTROLLER...250MSIC001.PV',
+          label: 'ЭКСТР.ДВИГ.ВЛАСТЬ...214JI200A',
           borderColor: 'rgb(10, 140, 146)',
           data: [
             41.12999725,
@@ -114,7 +114,7 @@ export default new Vuex.Store({
       ],
       datasets: [
         {
-          label: 'ТЕМПЕРАТУРА.EX.21401...250TI004',
+          label: 'УРОВЕНЬ.В...V.25001A...250LI001A',
           borderColor: 'rgb(10, 140, 146)',
           data: [
             234.3000031,
