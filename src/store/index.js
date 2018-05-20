@@ -10,7 +10,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     status: 0,
-    incidents: 0,
+    incidents: [],
     img: {
       url: '',
       verdict: 1,
@@ -304,9 +304,10 @@ export default new Vuex.Store({
               datetime: dateT,
               user: {
                 pk: 2,
+                username: 'system',
               },
             };
-            state.incidents.push(Object.assign({}, obj, { pk: state.incidents.length + 1 }));
+            state.incidents.push(Object.assign({}, obj, { pk: state.incidents.length + 1, }));
           } else if (message[key].verdict === 0 && state.status === 10) {
             state.status = 11;
           }

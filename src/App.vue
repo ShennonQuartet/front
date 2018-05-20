@@ -56,7 +56,11 @@ export default {
     ...mapGetters(['newIncident', 'status']),
   },
   mounted() {
-
+    this.$api.incidents()
+      .then((res) => {
+        console.log('123', res);
+        this.$store.commit('SET_INCIDENTS', res.data);
+      });
   },
 };
 </script>
