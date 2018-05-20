@@ -37,7 +37,7 @@ export default new Vuex.Store({
       ],
       datasets: [
         {
-          label: 'S.C.ВПУСК.ПП.ДАВЛ...214PI226AA',
+          label: 'Е.21402А....ГР.ВОДА.ВЫХ...214TIC101A',
           borderColor: 'rgb(10, 140, 146)',
           data: [
             9.18999958,
@@ -75,7 +75,7 @@ export default new Vuex.Store({
       ],
       datasets: [
         {
-          label: 'ЭКСТР.ДВИГ.ВЛАСТЬ...214JI200A',
+          label: 'ЦИЛ..9.ТЕМП.УПР...214TIC213A',
           borderColor: 'rgb(10, 140, 146)',
           data: [
             41.12999725,
@@ -152,7 +152,7 @@ export default new Vuex.Store({
       ],
       datasets: [
         {
-          label: 'ЦИЛ..3.ТЕМП.НАГР...214TI216A',
+          label: 'НАГНЕТАНИЕ.В.EX.21401...250PI001',
           borderColor: 'rgb(10, 140, 146)',
           data: [
             234.3000031,
